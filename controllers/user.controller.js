@@ -137,7 +137,7 @@ const userDelete = async (req = request, res = response) => {
             { status: false },
             { new: true }
         )
-    
+
         res.json({
             msg: 'delete API',
             user

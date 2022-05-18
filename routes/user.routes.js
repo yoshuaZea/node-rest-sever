@@ -12,7 +12,7 @@ const { userGet,
 } = require('../controllers/user.controller')
 
 // Middlewares
-const { checkErrors } = require('../middlewares/checkErrors.middleware') 
+const { checkErrors, verifyJwt, checkRole, isAdmin } = require('../middlewares')
 
 // Create a router
 const router = Router()
@@ -55,6 +55,9 @@ router.put('/:id',
 router.patch('/:id', userPatch)
 
 router.delete('/:id',
+    verifyJwt,
+    // isAdmin,
+    checkRole('ADMIN_ROLE', 'SALES_ROLE'),
     [
         check('id', 'It is not a valid mongo ID').isMongoId().custom(checkUserById)
     ],
