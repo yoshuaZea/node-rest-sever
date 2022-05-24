@@ -18,9 +18,13 @@ const { checkErrors, verifyJwt, checkRole, isAdmin } = require('../middlewares')
 const router = Router()
 
 // /api/users
-router.get('/', userGet)
+router.get('/', 
+    verifyJwt,
+    userGet
+)
 
 router.get('/:id', 
+    verifyJwt,
     [
         check('id', 'It is not a valid mongo ID').isMongoId().custom(checkUserById)
     ],
@@ -40,7 +44,8 @@ router.post('/',
     userPost
 )
 
-router.put('/:id', 
+router.put('/:id',
+    verifyJwt,
     [
         check('id', 'It is not a valid mongo ID').isMongoId().custom(checkUserById),
         check('name').isString().optional({ nullable: true }),

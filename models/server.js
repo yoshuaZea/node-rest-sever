@@ -8,8 +8,14 @@ class Server {
         // Instance of express to create a server
         this.app = express()
         this.port = process.env.PORT
-        this.authRoutePath = '/api/auth'
-        this.userRoutePath = '/api/users'
+        
+        this.paths = {
+            auth:       '/api/auth',
+            categories: '/api/categories',
+            products:   '/api/products',
+            search:   '/api/search',
+            users:      '/api/users'
+        }
 
         // Connect DB
         this.connectDatabase()
@@ -40,10 +46,19 @@ class Server {
 
     routes(){
         // Auth
-        this.app.use(this.authRoutePath, require('../routes/auth.routes'))
+        this.app.use(this.paths.auth, require('../routes/auth.routes'))
+
+        // Categories
+        this.app.use(this.paths.categories, require('../routes/categories.routes'))
+
+        // Products
+        this.app.use(this.paths.products, require('../routes/products.routes'))
+
+        // Search
+        this.app.use(this.paths.search, require('../routes/search.routes'))
         
         // Users
-        this.app.use(this.userRoutePath, require('../routes/user.routes'))
+        this.app.use(this.paths.users, require('../routes/user.routes'))
         
         // Errors
         this.app.use('*', require('../routes/errors.routes'))
