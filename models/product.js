@@ -32,6 +32,11 @@ const ProductSchema = Schema({
         ref: 'User',
         required: [true, 'The user who creates the new category is required']
     },
+    image: {
+        type: String,
+        required: false,
+        trim: true
+    }
 })
 
 // HIDE SOME FILEDS IN THE RESPONSES

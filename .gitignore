@@ -1,3 +1,4 @@
 # Ignore files and directories
 node_modules/
 .env
+uploads/*

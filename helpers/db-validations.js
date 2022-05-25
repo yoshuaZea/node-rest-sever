@@ -40,6 +40,16 @@ const checkProduct = async (id = '') => {
     }
 }
 
+// Verify collections
+const collectionsAllowed = (collection, collections ) => {
+    const allow = collections.includes(collection)
+
+    if(!allow){
+        throw new Error(`The collection ${collection} is not allowed, it just allowed ${collections}`)
+    }
+
+    return true
+}
 
 module.exports = {
     checkCategory, 
@@ -47,4 +57,5 @@ module.exports = {
     checkUserById,
     isValidRole,
     existEmail,
+    collectionsAllowed
 }

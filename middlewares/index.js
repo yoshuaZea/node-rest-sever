@@ -1,11 +1,13 @@
 // Import all midlewares
-const checkErrors = require('../middlewares/checkErrors.middleware') 
-const verifyJwt = require('../middlewares/verifyJwt.middleware')
-const checkRole = require('../middlewares/checkRole.middleware')
+const checkErrors = require('./checkErrors.middleware') 
+const checkRole = require('./checkRole.middleware')
+const verifyJwt = require('./verifyJwt.middleware')
+const verifyUploadedFile = require('./verifyUploadedFile.middleware')
 
 
 module.exports = {
     ...checkErrors,
+    ...checkRole,
     ...verifyJwt,
-    ...checkRole
+    ...verifyUploadedFile
 }
